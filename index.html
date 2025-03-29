@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Petualangan Scatter Emas</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div class="screen active" id="loadingScreen">
+    <img src="assets/bg.webp" class="bg-img" />
+    <div class="centered-text">⏳ Mohon Tunggu...</div>
+  </div>
+
+  <!-- Start Screen -->
+  <div class="screen" id="startScreen">
+    <img src="assets/bg.webp" class="bg-img" />
+    <div class="overlay">
+      <h1>🎯 Temukan Simbol X1000!</h1>
+      <p>Klik untuk mulai dan menangkan keberuntunganmu sekarang!</p>
+
+      <!-- Tombol dan Label disatukan -->
+      <div class="start-button-wrapper">
+        <img id="startButton" src="assets/start-btn.png" alt="Mulai" class="start-btn" />
+        <p class="start-label">TEKAN DISINI</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Video Screen -->
+  <div class="screen" id="videoScreen">
+    <video id="gameVideo" playsinline webkit-playsinline muted>
+      <source src="assets/video.mp4" type="video/mp4" />
+      <source src="assets/video.webm" type="video/webm" />
+      Perangkat Anda tidak mendukung video.
+    </video>
+  </div>
+
+  <!-- CTA Screen -->
+  <div class="screen" id="ctaScreen">
+    <img src="assets/bg2.png" class="bg-img" />
+    <div class="overlay">
+      <h2>🎁 Saatnya main versi lengkapnya!</h2>
+      <button id="downloadButton">📥 Download Sekarang</button>
+    </div>
+  </div>
+
+  <audio id="goldSound" src="assets/gold.mp3" preload="auto"></audio>
+
+  <script>
+    const loadingScreen = document.getElementById("loadingScreen");
+    const startScreen = document.getElementById("startScreen");
+    const videoScreen = document.getElementById("videoScreen");
+    const ctaScreen = document.getElementById("ctaScreen");
+
+    const startButton = document.getElementById("startButton");
+    const downloadButton = document.getElementById("downloadButton");
+
+    const gameVideo = document.getElementById("gameVideo");
+    const goldSound = document.getElementById("goldSound");
+
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        loadingScreen.classList.remove("active");
+        startScreen.classList.add("active");
+      }, 1500);
+    });
+
+    startButton.addEventListener("click", () => {
+      goldSound.play();
+      startScreen.classList.remove("active");
+      videoScreen.classList.add("active");
+      gameVideo.play();
+    });
+
+    gameVideo.addEventListener("ended", () => {
+      videoScreen.classList.remove("active");
+      ctaScreen.classList.add("active");
+    });
+
+    // ✅ CTA sesuai aturan Facebook Playable Ads
+    downloadButton.addEventListener("click", () => {
+  window.location.href = "https://caraangkasa.xyz/hanyakamu";
+});
+  </script>
+
+</body>
+</html>
